@@ -37,7 +37,7 @@ public class DrawingArea extends AppCompatActivity {
         });
 
         sizeSeekBar.setProgress(20);
-        sizeSeekBar.setMax(300);
+        sizeSeekBar.setMax(250);
     }
 
     public void initViews(){
