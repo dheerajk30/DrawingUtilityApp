@@ -63,6 +63,10 @@ public class SquareDrawingArea extends View {
         squarePaint.setStyle(Paint.Style.STROKE);
     }
 
+
+    public void adjustRectSize(int length){
+        this.length=length;
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
