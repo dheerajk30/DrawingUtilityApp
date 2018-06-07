@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by dheeraj on 7/6/18.
  */
@@ -27,6 +29,7 @@ public class SquareDrawingArea extends View {
     int length=200;
     Boolean singletap;
     Paint squarePaint;
+    ArrayList<Rect> squares;
 
 
     public SquareDrawingArea(Context context) {
@@ -55,8 +58,9 @@ public class SquareDrawingArea extends View {
 
     public void init(@Nullable AttributeSet attr){
         Toast.makeText(ctx,"init",Toast.LENGTH_SHORT).show();
+        squares=new ArrayList<Rect>();
         gestureDetector=new GestureDetector(ctx,new DrawGestureDetector());
-        singletap=true;
+        singletap=false;
         squarePaint=new Paint();
         squarePaint.setColor(Color.rgb(0, 0, 0));
         squarePaint.setStrokeWidth(10);
@@ -67,6 +71,10 @@ public class SquareDrawingArea extends View {
     public void adjustRectSize(int length){
         this.length=length;
     }
+
+    public ArrayList<Rect> getAllRects(){
+        return squares;
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -75,15 +83,19 @@ public class SquareDrawingArea extends View {
 
         if(singletap){
             Rect rect=new Rect();
-            float left=x_centre-(float) (length/2);
-            float right=x_centre+(float) (length/2);
+            rect.left=x_centre- (length/2);
+            rect.right=x_centre+ (length/2);
 
-            float top=y_centre-(float) (length/2);
-            float bottom=y_centre+(float)(length/2);
+            rect.top=y_centre-(length/2);
+            rect.bottom=y_centre+(length/2);
 
-            Log.d("main", "onDraw: left"+left+"right"+right+"top"+top+"bottom"+bottom);
-            canvas.drawRect(left,top,right,bottom,squarePaint);
+            //Log.d("main", "onDraw: left"+left+"right"+right+"top"+top+"bottom"+bottom);
+            //canvas.drawRect(rect,squarePaint);
 
+            squares.add(rect);
+            for (Rect r:squares){
+                canvas.drawRect(r,squarePaint);
+            }
         }
     }
 
@@ -94,7 +106,6 @@ public class SquareDrawingArea extends View {
         x_centre=(int) event.getX();
         y_centre=(int) event.getY();
 
-        Toast.makeText(ctx,singletap+"single tap at"+x_centre+" and"+y_centre,Toast.LENGTH_SHORT).show();
 
         postInvalidate();
         return true;
