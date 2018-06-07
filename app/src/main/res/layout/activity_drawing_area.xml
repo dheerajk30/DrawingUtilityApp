@@ -7,39 +7,61 @@
     android:orientation="vertical"
     tools:context="com.example.dheeraj.drawingapp.DrawingArea">
 
-    <com.example.dheeraj.drawingapp.Views.SquareDrawingArea
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:layout_margin="5dp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvsize"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="Size: 20"/>
+    <com.example.dheeraj.drawingapp.Views.SquareDrawingArea
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:layout_margin="5dp"
         android:id="@+id/drawingArea"/>
 
-    <LinearLayout
+
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end|bottom"
+            android:id="@+id/viewall"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_info_outline_black_24dp" />
+
+
+
+    </RelativeLayout>
+
+    <SeekBar
+        android:id="@+id/sizeSeekBar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:layout_margin="5dp"
-        android:orientation="horizontal">
-
-
-        <SeekBar
-            android:id="@+id/sizeSeekBar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/viewall"
-            android:text="@string/info_btn_txt"/>
-
-
-
-    </LinearLayout>
-
+        android:layout_weight="1"
+        />
 
 
 

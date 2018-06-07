@@ -64,7 +64,7 @@ public class SquareDrawingArea extends View {
         squarePaint=new Paint();
         squarePaint.setColor(Color.rgb(0, 0, 0));
         squarePaint.setStrokeWidth(10);
-        squarePaint.setStyle(Paint.Style.STROKE);
+        squarePaint.setStyle(Paint.Style.FILL);
     }
 
 
@@ -75,6 +75,7 @@ public class SquareDrawingArea extends View {
     public ArrayList<Rect> getAllRects(){
         return squares;
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -85,7 +86,6 @@ public class SquareDrawingArea extends View {
             Rect rect=new Rect();
             rect.left=x_centre- (length/2);
             rect.right=x_centre+ (length/2);
-
             rect.top=y_centre-(length/2);
             rect.bottom=y_centre+(length/2);
 
@@ -97,18 +97,23 @@ public class SquareDrawingArea extends View {
                 canvas.drawRect(r,squarePaint);
             }
         }
+        else{
+            for (Rect r:squares){
+                canvas.drawRect(r,squarePaint);
+            }
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        singletap=true;
+        singletap=gestureDetector.onTouchEvent(event);
         x_centre=(int) event.getX();
         y_centre=(int) event.getY();
 
 
         postInvalidate();
-        return true;
+        return gestureDetector.onTouchEvent(event);
 
     }
 
@@ -122,12 +127,27 @@ public class SquareDrawingArea extends View {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
 
-            return true;
+            return false;
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
             return true;
+        }
+
+        @Override
+        public boolean onContextClick(MotionEvent e) {
+            return false;
         }
     }
 }

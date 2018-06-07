@@ -2,12 +2,14 @@ package com.example.dheeraj.drawingapp;
 
 import android.content.DialogInterface;
 import android.graphics.Rect;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dheeraj.drawingapp.Views.SquareDrawingArea;
@@ -18,7 +20,9 @@ public class DrawingArea extends AppCompatActivity {
 
     SquareDrawingArea drawingArea;
     SeekBar sizeSeekBar;
-    Button viewall;
+    FloatingActionButton viewall;
+    TextView tvsize;
+
 
 
     @Override
@@ -31,6 +35,7 @@ public class DrawingArea extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 drawingArea.adjustRectSize(i);
+                tvsize.setText("Size: "+i);
             }
 
             @Override
@@ -46,6 +51,7 @@ public class DrawingArea extends AppCompatActivity {
 
         sizeSeekBar.setProgress(20);
         sizeSeekBar.setMax(250);
+        tvsize.setText("Size: 20");
         viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +75,8 @@ public class DrawingArea extends AppCompatActivity {
     public void initViews(){
         drawingArea=(SquareDrawingArea) findViewById(R.id.drawingArea);
         sizeSeekBar=(SeekBar) findViewById(R.id.sizeSeekBar);
-        viewall=(Button) findViewById(R.id.viewall);
+        viewall=(FloatingActionButton) findViewById(R.id.viewall);
+        tvsize=(TextView) findViewById(R.id.tvsize);
     }
 
     public String format(ArrayList<Rect> squares){
