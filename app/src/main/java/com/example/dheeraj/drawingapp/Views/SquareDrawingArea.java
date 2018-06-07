@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dheeraj.drawingapp.R;
+
 import java.util.ArrayList;
 
 /**
@@ -30,7 +32,7 @@ public class SquareDrawingArea extends View {
     Boolean singletap;
     Paint squarePaint;
     ArrayList<Rect> squares;
-
+    int boxcolor;
 
     public SquareDrawingArea(Context context) {
         super(context);
@@ -57,15 +59,17 @@ public class SquareDrawingArea extends View {
     }
 
     public void init(@Nullable AttributeSet attr){
-        Toast.makeText(ctx,"init",Toast.LENGTH_SHORT).show();
+        boxcolor= Color.BLACK;
         squares=new ArrayList<Rect>();
         gestureDetector=new GestureDetector(ctx,new DrawGestureDetector());
         singletap=false;
         squarePaint=new Paint();
-        squarePaint.setColor(Color.rgb(0, 0, 0));
         squarePaint.setStrokeWidth(10);
         squarePaint.setStyle(Paint.Style.FILL);
+        squarePaint.setColor(Color.rgb(200,0,0));
     }
+
+
 
 
     public void adjustRectSize(int length){
@@ -79,7 +83,6 @@ public class SquareDrawingArea extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(45f,55f,55f,45f,squarePaint);
 
 
         if(singletap){
@@ -88,9 +91,6 @@ public class SquareDrawingArea extends View {
             rect.right=x_centre+ (length/2);
             rect.top=y_centre-(length/2);
             rect.bottom=y_centre+(length/2);
-
-            //Log.d("main", "onDraw: left"+left+"right"+right+"top"+top+"bottom"+bottom);
-            //canvas.drawRect(rect,squarePaint);
 
             squares.add(rect);
             for (Rect r:squares){
@@ -149,5 +149,8 @@ public class SquareDrawingArea extends View {
         public boolean onContextClick(MotionEvent e) {
             return false;
         }
+
+
+
     }
 }

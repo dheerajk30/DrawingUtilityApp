@@ -1,6 +1,7 @@
 package com.example.dheeraj.drawingapp;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -89,4 +90,6 @@ public class DrawingArea extends AppCompatActivity {
 
         return b.toString();
     }
+
+
 }
