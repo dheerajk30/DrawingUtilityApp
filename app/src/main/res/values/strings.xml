@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DrawingApp</string>
+    <string name="info_btn_txt">View Info</string>
 </resources>
